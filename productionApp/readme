@@ -1,0 +1,27 @@
+
+opis programy
+---------------------------------------------------------
+1. application calculate components for production plan (przyklad "z zycia" - producja kabli)
+2. sa 3 producty w pliku baseProducts
+3. produkcja w dwie zmiany
+4. produkcja sklada zamówienie: typ produktu "FG" + ilosc dla produkcji (naprzyklad: 1714386-1 150 sztuk, 1714458-1 200 sztuk)
+5. zamowienie skladaja dwie zmiany produkcyjne na pewna date (szyli: na 15-12-2017: piersza zmiana i druga zmiana wpisuja ilosci produktow dla tego zeby komponenty byli przygotowany na magazinie)
+6. plik liczy ile komponentow dla koznej zmiany produkcji nalezy przygotowac i generuje sie lista tych componentow. (zmiana wpisala plan -> wygenerowala sie lista componentow dla magazynu na pewna data)
+7. programa musi miac interface graficzny (Data wpisuje sie tekstowe pole, podaje sie numer zmiany, z listy wybiera sie "FG", wpisuje sie ilosc) plik moze uzyc SQLite
+
+baza danych pnbase.db
+----------------------------------------------------------
+1. sproektowana w SQlitestudio "od zera"
+2. (tabeli sobie mozna zobaczyc) glowny dwie tabeli to - pn (baza komponentow) i plan (dwie zmiany skladaja zamowienie komponentow)
+3. w tabeli plan dodano jeden produkt 1714386-1 w ilosci po 100 sztuk dla zmiany na 01-01-2000, i 1714458-1 na 02-01-2000 dla zmiany "a"
+4. mozna spobuwac sql zapyt : 
+
+SELECT date,shift_id, fg_id,pn,description,usege,fg_qty, round(fg_qty / usege,2) as qty,unit
+FROM pn JOIN plan USING(fg_id)
+where date ="01-01-2000" and shift_id="a"
+
+wydaje lista komponentow na 01-01-2000 dla zmiany "a"
+
+co dalej?
+----------------------------------------------------------
+interfejs graficzny dla mozliwoczi zamowic komponenty dla produkcji
